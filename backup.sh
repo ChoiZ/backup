@@ -7,6 +7,7 @@
 
 EMAIL=""
 FOLDER="/backup"
+HOST=`hostname`
 
 DATE=`date +%F` # Full Date (e.g. 2012-12-31)
 DAY_OF_WEEK=`date +%w` # Day of week. (1 for Monday…)
@@ -78,7 +79,7 @@ function backup_folder() {
 
     FOLDER_BACKUP=$1
 
-    echo "[$DATE $TIME] Backup \`$FOLDER_BACKUP\`…" > $LOG
+    echo "[$DATE $TIME] $HOST Backup \`$FOLDER_BACKUP\`…" > $LOG
 
     create_folder
 
@@ -95,14 +96,14 @@ function backup_folder() {
     rm -rf $DEST/current && ln -s $DATE_DEST $DEST/current
 
     if [ $BACKUP_SUCCESS = "1" ]; then
-        echo "[$DATE $TIME] Backup \`$FOLDER_BACKUP\` [success]" >> $LOG
+        echo "[$DATE $TIME] $HOST Backup \`$FOLDER_BACKUP\` [success]" >> $LOG
         if [ -n "$EMAIL" ]; then
-            cat $LOG | mail -s "Backup \`$FOLDER_BACKUP\`: success" $EMAIL
+            cat $LOG | mail -s "$HOST Backup \`$FOLDER_BACKUP\`: success" $EMAIL
         fi
     else
-        echo "[$DATE $TIME] Backup \`$FOLDER_BACKUP\` [failed]" >> $LOG
+        echo "[$DATE $TIME] $HOST Backup \`$FOLDER_BACKUP\` [failed]" >> $LOG
         if [ -n "$EMAIL" ]; then
-            cat $LOG | mail -s "Backup \`$FOLDER_BACKUP\`: failed" $EMAIL
+            cat $LOG | mail -s "$HOST Backup \`$FOLDER_BACKUP\`: failed" $EMAIL
         fi
     fi
 

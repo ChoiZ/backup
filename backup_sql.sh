@@ -15,6 +15,7 @@
 
 EMAIL=""
 FOLDER="/backup"
+HOST=`hostname`
 
 SQL_LOGIN=""
 SQL_PASS=""
@@ -84,7 +85,7 @@ function sql_backup() {
     DATABASE=$1
     FILENAME="$DATABASE-$DATE-$TIME_H_M"
 
-    echo "[$DATE $TIME] Backup MySQL database \`$DATABASE\`…" > $LOG
+    echo "[$DATE $TIME] $HOST Backup MySQL database \`$DATABASE\`…" > $LOG
 
     create_folder
 
@@ -100,14 +101,14 @@ function sql_backup() {
     rm -rf $DEST/current && ln -s $DATE_DEST $DEST/current
 
     if [ $BACKUP_SUCCESS = "1" ]; then
-        echo "[$DATE $TIME] Backup MySQL database \`$DATABASE\` [success]" >> $LOG
+        echo "[$DATE $TIME] $HOST Backup MySQL database \`$DATABASE\` [success]" >> $LOG
         if [ -n "$EMAIL" ]; then
-            cat $LOG | mail -s "Backup \`$DATABASE\`: success" $EMAIL
+            cat $LOG | mail -s "$HOST Backup \`$DATABASE\`: success" $EMAIL
         fi
     else
-        echo "[$DATE $TIME] Backup MySQL database \`$DATABASE\` [failed]" >> $LOG
+        echo "[$DATE $TIME] $HOST Backup MySQL database \`$DATABASE\` [failed]" >> $LOG
         if [ -n "$EMAIL" ]; then
-            cat $LOG | mail -s "Backup \`$DATABASE\`: failed" $EMAIL
+            cat $LOG | mail -s "$HOST Backup \`$DATABASE\`: failed" $EMAIL
         fi
     fi
 
