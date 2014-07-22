@@ -29,7 +29,8 @@ TIME_H_M=`date +%Hh%M` # Time (e.g. 13h11)
 
 # Backup name
 if [ -n "$1" ]; then
-    NAME=$1 # Name of backup
+    DATABASE=$1 # Name of backup
+    DEST="$FOLDER/sql/$DATABASE"
 else
     exit 1
 fi
@@ -39,15 +40,18 @@ if [ -n "$2" ]; then
     EMAIL=$2
 fi
 
-DEST="$FOLDER/sql/$NAME"
-LOG="$FOLDER/logs/sql_$NAME.log"
-
 function create_folder() {
 
     # Create current directory
     if [ ! -d "$DEST/current" ]; then
         mkdir -p $DEST/current
     fi
+
+    if [ ! -d "$DEST/logs" ]; then
+        mkdir -p $DEST/logs
+    fi
+
+    LOG=$DEST/logs/$DATABASE-$DATE-$TIME_H_M.log
 
     if [ -d "$DEST/incomplete" ]; then
         rm -rf $DEST/incomplete
@@ -82,7 +86,6 @@ function create_folder() {
 
 function sql_backup() {
 
-    DATABASE=$1
     FILENAME="$DATABASE-$DATE-$TIME_H_M"
 
     echo "[$DATE $TIME] $HOST Backup MySQL database \`$DATABASE\`…" > $LOG
@@ -114,4 +117,4 @@ function sql_backup() {
 
 }
 
-sql_backup $NAME
+sql_backup

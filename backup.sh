@@ -40,14 +40,18 @@ if [ -n "$4" ]; then
     EMAIL=$4
 fi
 
-LOG="$FOLDER/logs/web_$NAME.log"
-
 function create_folder() {
 
     # Create current directory
     if [ ! -d "$DEST/current" ]; then
         mkdir -p $DEST/current
     fi
+
+    if [ ! -d "$DEST/logs" ]; then
+        mkdir -p $DEST/logs
+    fi
+
+    LOG=$DEST/logs/$NAME.log
 
     if [ -d "$DEST/incomplete" ]; then
         rm -rf $DEST/incomplete
@@ -77,9 +81,7 @@ function create_folder() {
 
 function backup_folder() {
 
-    FOLDER_BACKUP=$1
-
-    echo "[$DATE $TIME] $HOST Backup \`$FOLDER_BACKUP\`…" > $LOG
+    echo "[$DATE $TIME] $HOST Backup \`$NAME\`…" > $LOG
 
     create_folder
 
@@ -96,17 +98,17 @@ function backup_folder() {
     rm -rf $DEST/current && ln -s $DATE_DEST $DEST/current
 
     if [ $BACKUP_SUCCESS = "1" ]; then
-        echo "[$DATE $TIME] $HOST Backup \`$FOLDER_BACKUP\` [success]" >> $LOG
+        echo "[$DATE $TIME] $HOST Backup \`$NAME\` [success]" >> $LOG
         if [ -n "$EMAIL" ]; then
-            cat $LOG | mail -s "$HOST Backup \`$FOLDER_BACKUP\`: success" $EMAIL
+            cat $LOG | mail -s "$HOST Backup \`$NAME\`: success" $EMAIL
         fi
     else
-        echo "[$DATE $TIME] $HOST Backup \`$FOLDER_BACKUP\` [failed]" >> $LOG
+        echo "[$DATE $TIME] $HOST Backup \`$NAME\` [failed]" >> $LOG
         if [ -n "$EMAIL" ]; then
-            cat $LOG | mail -s "$HOST Backup \`$FOLDER_BACKUP\`: failed" $EMAIL
+            cat $LOG | mail -s "$HOST Backup \`$NAME\`: failed" $EMAIL
         fi
     fi
 
 }
 
-backup_folder $NAME
+backup_folder
