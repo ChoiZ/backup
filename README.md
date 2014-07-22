@@ -65,23 +65,23 @@ Failed:
 2.  Edit `EMAIL`, `FOLDER`, `SQL_LOGIN` and `SQL_PASS` variables.
 3.  Backup
 
-Backup `database_s` database:
+Backup `database` database:
 
-    ./backup_sql.sh database_s
+    ./backup_sql.sh database
 
-Backup `database_f` database and send email to backup@domain.com:
+Backup `database` database and send email to backup@domain.com:
 
-    ./backup_sql.sh database_f backup@domain.com
+    ./backup_sql.sh database backup@domain.com
 
 ### Log
 
 Success:
 
-    [2014-07-22 00h53:33] Backup MySQL database `database_s`…
-    [2014-07-22 00h53:33] Backup MySQL database `database_ss` [success]
+    [2014-07-22 00h53:33] Backup MySQL database `database`…
+    [2014-07-22 00h53:33] Backup MySQL database `database` [success]
 
 Failed:
 
-    [2014-07-22 00h53:43] Backup MySQL database `database_f`…
-    ERROR 1049 (42000): Unknown database 'database_f'
-    [2014-07-22 00h53:43] Backup MySQL database `database_f` [failed]
+    [2014-07-22 00h53:43] Backup MySQL database `database`…
+    ERROR 1049 (42000): Unknown database 'database'
+    [2014-07-22 00h53:43] Backup MySQL database `database` [failed]
