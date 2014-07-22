@@ -12,9 +12,9 @@ Backup `/var/www` into `/backup/www`:
 
     ./backup.sh web_backup /var/www /backup/www
 
-Backup `/var/www` into `/backup/www` and email the result at backup@mydomain.com:
+Backup `/var/www` into `/backup/www` and email the result at backup@domain.com:
 
-    ./backup.sh web_backup /var/www /backup/www backup@mydomain.com
+    ./backup.sh web_backup /var/www /backup/www backup@domain.com
 
 ### Log
 
