@@ -5,7 +5,7 @@ Backup
 
 ### Documentation
 
-1.  Edit EMAIL and FOLDER variables.
+1.  Edit `EMAIL` and `FOLDER` variables.
 2.  Backup.
 
 Backup `/var/www` into `/backup/www`:
@@ -61,8 +61,8 @@ Failed:
 
 ### Documentation
 
-1.  Create your 'backup' user in MySQL.
-2.  Edit EMAIL, FOLDER, SQL_LOGIN and SQL_PASS variables.
+1.  Create your `backup` user in MySQL.
+2.  Edit `EMAIL`, `FOLDER`, `SQL_LOGIN` and `SQL_PASS` variables.
 3.  Backup
 
 Backup `success` database:
