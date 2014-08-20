@@ -1,6 +1,6 @@
 #!/bin/bash
 # Backup SQL
-# Last modified: 2014-07-22
+# Last modified: 2014-08-20
 # Author: François LASSERRE <choiz@me.com>
 # License: GNU GPL http://www.gnu.org/licenses/gpl.html
 
@@ -26,6 +26,14 @@ DAY_OF_MONTH=`date +%d` # Day of Month (e.g. 31)
 
 TIME=`date +%Hh%M:%S` # Full Time (e.g. 13h11:58)
 TIME_H_M=`date +%Hh%M` # Time (e.g. 13h11)
+
+MAX_DISK_USED=80 # Max disk use in percent.
+DISK_USED=`df -P $FOLDER | awk '{print $5}' | grep % | cut -d% -f1`
+
+if [ $DISK_USED -ge $MAX_DISK_USED ]; then
+    echo "$FOLDER disk usage is above $MAX_DISK_USED%. Aborting backup.";
+    exit 1
+fi
 
 # Backup name
 if [ -n "$1" ]; then
