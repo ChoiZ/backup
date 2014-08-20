@@ -5,16 +5,17 @@ Backup
 
 ### Documentation
 
-1.  Edit `EMAIL` and `FOLDER` variables.
-2.  Backup.
+1.  Rename `folder_backup.sh.dist` by `folder_backup.sh`
+2.  Edit `EMAIL` and `FOLDER` variables.
+3.  Backup.
 
 Backup `/var/www` into `/backup/www`:
 
-    ./backup.sh web_backup /var/www /backup/www
+    ./folder_backup.sh web_backup /var/www /backup/www
 
 Backup `/var/www` into `/backup/www` and email the result at backup@domain.com:
 
-    ./backup.sh web_backup /var/www /backup/www backup@domain.com
+    ./folder_backup.sh web_backup /var/www /backup/www backup@domain.com
 
 ### Log
 
@@ -61,17 +62,17 @@ Failed:
 
 ### Documentation
 
-1.  Create your `backup` user in MySQL.
+1.  Rename `sql_backup.sh.dist` by `sql_backup.sh`
 2.  Edit `EMAIL`, `FOLDER`, `SQL_LOGIN` and `SQL_PASS` variables.
 3.  Backup
 
 Backup `database` database:
 
-    ./backup_sql.sh database
+    ./sql_backup.sh database
 
 Backup `database` database and send email to backup@domain.com:
 
-    ./backup_sql.sh database backup@domain.com
+    ./sql_backup.sh database backup@domain.com
 
 ### Log
 
