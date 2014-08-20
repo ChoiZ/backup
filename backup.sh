@@ -14,7 +14,7 @@ DAY_OF_WEEK=`date +%w` # Day of week. (1 for Monday…)
 DAY_OF_MONTH=`date +%d` # Day of Month (e.g. 31)
 TIME=`date +%Hh%M:%S` # Full Time (e.g. 13h11:58)
 
-MAX_DISK_USED=80
+MAX_DISK_USED=80 # Max disk use in percent.
 DISK_USED=`df -P $FOLDER | awk '{print $5}' | grep % | cut -d% -f1`
 
 if [ $DISK_USED -ge $MAX_DISK_USED ]; then
