@@ -85,11 +85,11 @@ function create_folder() {
         DATE_DEST=$DEST/daily/`date +%F`
     fi
 
+    echo "[$DATE $TIME] $HOST Backup \`$NAME\`…" > $LOG
+
 }
 
 function backup_folder() {
-
-    echo "[$DATE $TIME] $HOST Backup \`$NAME\`…" > $LOG
 
     create_folder
 
