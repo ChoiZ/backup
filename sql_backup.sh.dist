@@ -89,14 +89,14 @@ function create_folder() {
         fi
         DATE_DEST=$DEST/daily/$DATE
     fi
+    
+    echo "[$DATE $TIME] $HOST Backup MySQL database \`$DATABASE\`…" > $LOG
 
 }
 
 function sql_backup() {
 
     FILENAME="$DATABASE-$DATE-$TIME_H_M"
-
-    echo "[$DATE $TIME] $HOST Backup MySQL database \`$DATABASE\`…" > $LOG
 
     create_folder
 
