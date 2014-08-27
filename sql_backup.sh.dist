@@ -1,8 +1,10 @@
 #!/bin/bash
 # Backup SQL
-# Last modified: 2014-08-20
+# Last modified: 2014-08-27
 # Author: François LASSERRE <choiz@me.com>
 # License: GNU GPL http://www.gnu.org/licenses/gpl.html
+
+# Require: gzip, mysql, mysqldump
 
 #
 # mysqldump --single-transaction (InnoDB)
@@ -96,11 +98,12 @@ function create_folder() {
 
 function sql_backup() {
 
-    FILENAME="$DATABASE-$DATE-$TIME_H_M"
-
     create_folder
-
-    mysqldump -u $SQL_LOGIN -p$SQL_PASS $DATABASE > $DEST/incomplete/$FILENAME.sql 2>&1 && BACKUP_SUCCESS="1" || mysql -u $SQL_LOGIN -p$SQL_PASS $DATABASE >> $LOG 2>&1 || BACKUP_SUCCESS="0"
+    
+    FILENAME="$DATABASE-$DATE-$TIME_H_M.sql"
+    DEST_SQL="$DEST/incomplete/$FILENAME"
+    
+    mysqldump -u $SQL_LOGIN -p$SQL_PASS $DATABASE > $DEST_SQL 2>&1 && gzip $DEST_SQL && BACKUP_SUCCESS="1" || mysql -u $SQL_LOGIN -p$SQL_PASS $DATABASE >> $LOG 2>&1 || BACKUP_SUCCESS="0"
 
     # Delete existing destination directory
     if [ -d "$DATE_DEST" ]; then
